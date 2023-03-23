@@ -1,19 +1,19 @@
-import LinkWrapper from "@/components/LinkWrapper";
-import Main from "@/components/Main";
-import dynamic from "next/dynamic";
-import { Info } from '@styled-icons/fluentui-system-regular/Info'
+import { MapProps } from "@/components/Map";
+import client from "@/graphql/client";
+import { GetPlacesQuery } from "@/graphql/generated/graphql";
+import { GET_PLACES } from "@/graphql/queries";
+import HomeTemplate from "@/templates/Home";
 
-const DynamicMap = dynamic(() => import("@/components/Map"), {
-  ssr: false,
-});
+export default function Home({places} : MapProps){
+  return <HomeTemplate places={places} />
+}
 
-export default function Home() {
-  return (
-    <>
-      <LinkWrapper href="/about">
-        <Info size={32} aria-label="about"/>
-      </LinkWrapper>
-      <DynamicMap/>
-    </>
-  );
+export const getStaticProps = async () => {
+  const { places } = await client.request<GetPlacesQuery>(GET_PLACES)
+
+  return {
+    props: {
+      places
+    }
+  }
 }

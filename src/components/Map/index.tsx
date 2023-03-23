@@ -16,7 +16,7 @@ export type MapProps = {
 
 const Map = ({places} : MapProps) => {
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={3} style={{height: 400, width: "100%"}}>
+    <MapContainer center={[51.505, -0.09]} zoom={3} style={{height: "100%", width: "100%", backgroundColor: "transparent"}}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
