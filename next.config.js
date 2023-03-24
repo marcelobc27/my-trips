@@ -7,11 +7,17 @@ const withPWA = require('next-pwa')({
   disable: !isProd
 })
 
+const imagesConfig = {
+  
+}
 
 const nextConfig = {
   reactStrictMode: true,
 }
 
 module.exports = withPWA({
-  nextConfig
+  nextConfig,
+  images: {
+    domains: ['media.graphassets.com'],
+  }
 })

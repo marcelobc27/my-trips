@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 
 type Place = {
@@ -15,6 +16,7 @@ export type MapProps = {
 }
 
 const Map = ({places} : MapProps) => {
+  const router = useRouter()
   return (
     <MapContainer center={[51.505, -0.09]} zoom={3} style={{height: "100%", width: "100%", backgroundColor: "transparent"}}>
       <TileLayer
@@ -25,7 +27,16 @@ const Map = ({places} : MapProps) => {
         const { latitude, longitude } = location
 
         return(
-          <Marker key={`place=${id}`} position={[latitude, longitude]} title={name}>
+          <Marker 
+            key={`place=${id}`}
+            position={[latitude, longitude]}
+            title={name}
+            eventHandlers={{
+              click: () => {
+                router.push(`/place/${slug}`)
+              }
+            }}
+          >  
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
