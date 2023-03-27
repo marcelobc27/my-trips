@@ -38,7 +38,17 @@ const CustomTileLayer = () => {
 const Map = ({places} : MapProps) => {
   const router = useRouter()
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={3} style={{height: "100%", width: "100%", backgroundColor: "transparent"}}>
+    <MapContainer 
+      center={[0, 0]} 
+      zoom={2} 
+      minZoom={2}
+      maxBounds={
+        [
+          [-180, 180],
+          [180, -180]
+        ]
+      }
+      style={{height: "100%", width: "100%", backgroundColor: "transparent"}}>
       <CustomTileLayer/>
       {places?.map(({id, slug, name, location}) => {
         const { latitude, longitude } = location
